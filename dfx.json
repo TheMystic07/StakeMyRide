@@ -1,0 +1,26 @@
+{
+  "canisters": {
+    "SkateMyRide_backend": {
+      "main": "src/SkateMyRide_backend/main.mo",
+      "type": "motoko"
+    },
+    "SkateMyRide_frontend": {
+      "dependencies": [
+        "SkateMyRide_backend"
+      ],
+      "source": [
+        "src/SkateMyRide_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "SkateMyRide_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
