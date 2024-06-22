@@ -9,10 +9,28 @@
     "prebuild": "npm run prebuild --workspaces --if-present",
     "pretest": "npm run prebuild --workspaces --if-present",
     "start": "npm start --workspaces --if-present",
-    "test": "npm test --workspaces --if-present"
+    "test": "npm test --workspaces --if-present",
+    "dev": "vite",
+    "frontend:dev": "cd src/SkateMyRide_frontend && npm run dev",
+    "frontend:build": "cd src/SkateMyRide_frontend && npm run build",
+    "frontend:serve": "cd src/SkateMyRide_frontend && npm run serve"
   },
   "type": "module",
   "workspaces": [
     "src/SkateMyRide_frontend"
-  ]
+  ],
+  "dependencies": {
+    "@headlessui/react": "^2.1.0",
+    "@heroicons/react": "^2.1.4",
+    "all": "^0.0.0",
+    "axios": "^1.7.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.23.1",
+    "yarn": "^1.22.22"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.3.1"
+  }
 }

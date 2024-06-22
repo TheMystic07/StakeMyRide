@@ -4,11 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "setup": "npm i && dfx canister create SkateMyRide_backend && dfx generate SkateMyRide_backend && dfx deploy",
-    "start": "vite --port 3000",
-    "prebuild": "dfx generate",
-    "build": "tsc && vite build",
-    "format": "prettier --write \"src/**/*.{json,js,jsx,ts,tsx,css,scss}\""
+   "setup": "npm i && dfx canister create SkateMyRide_backend && dfx generate SkateMyRide_backend && dfx deploy",
+  "start": "vite --port 3000",
+  "prebuild": "dfx generate",
+  "build": "tsc && vite build",
+  "format": "prettier --write \"src/**/*.{json,js,jsx,ts,tsx,css,scss}\"",
+  "dev": "vite",
+  "serve": "vite preview",
+  "frontend:dev": "vite --mode development"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -27,4 +30,5 @@
     "vite": "^4.3.9",
     "vite-plugin-environment": "^1.1.3"
   }
+  
 }
