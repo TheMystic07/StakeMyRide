@@ -1,30 +1,25 @@
-import { useState } from 'react';
-import { SkateMyRide_backend } from 'declarations/SkateMyRide_backend';
+// src/App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import BookRide from './Components/BookRide';
+import CreateRidePage from './Components/CreateRidePage';
+import FindRide from './Components/FindRide';
+import Home from './Components/Home';
+import UserProfile from './Components/UserProfile';
 
 function App() {
-  const [greeting, setGreeting] = useState('');
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    const name = event.target.elements.name.value;
-    SkateMyRide_backend.greet(name).then((greeting) => {
-      setGreeting(greeting);
-    });
-    return false;
-  }
-
   return (
-    <main>
-      <img src="/logo2.svg" alt="DFINITY logo" />
-      <br />
-      <br />
-      <form action="#" onSubmit={handleSubmit}>
-        <label htmlFor="name">Enter your name: &nbsp;</label>
-        <input id="name" alt="Name" type="text" />
-        <button type="submit">Click Me!</button>
-      </form>
-      <section id="greeting">{greeting}</section>
-    </main>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/book-ride" element={<BookRide />} />
+          <Route path="/create-ride" element={<CreateRidePage />} />
+          <Route path="/find-ride" element={<FindRide />} />
+          <Route path="/profile" element={<UserProfile />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
