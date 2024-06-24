@@ -1,39 +1,89 @@
-import React from 'react';
+import img from '../images/car_pool.png';
+import React, { useState, useEffect } from 'react';
+import './Home.scss';
+import { FaSearch, FaSun, FaMoon, FaCar } from 'react-icons/fa';
 
+const Home = () => {
+  const [darkMode, setDarkMode] = useState(false);
 
-function Example() {
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
-    <div className="bg-gray-100">
-      <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="overflow-hidden bg-white shadow sm:rounded-lg">
-          <div className="px-4 py-5 sm:px-6">
-            <h3 className="text-lg font-medium leading-6 text-gray-900">Frequently Asked Questions</h3>
-          </div>
-          <div className="border-t border-gray-200">
-            <Disclosure as="dl">
-              {({ open }) => (
-                <>
-                  <dt className="px-4 py-4 sm:px-6">
-                    <Disclosure.Button className="text-left w-full flex justify-between items-start text-gray-400 focus:outline-none">
-                      <span className="text-lg font-medium text-gray-900">What is Tailwind CSS?</span>
-                      <span className="ml-6 h-7 flex items-center">
-                        <ChevronUpIcon className={`${open ? 'transform rotate-180' : ''} h-6 w-6`} />
-                      </span>
-                    </Disclosure.Button>
-                  </dt>
-                  <Disclosure.Panel as="dd" className="px-4 sm:px-6 pb-4">
-                    <p className="text-base text-gray-500">
-                      Tailwind CSS is a utility-first CSS framework for quickly building custom designs. It provides low-level utility classes that let you build completely custom designs without ever leaving your HTML.
-                    </p>
-                  </Disclosure.Panel>
-                </>
-              )}``
-            </Disclosure>
-          </div>  
+    <div className={`home-container ${darkMode ? 'dark' : ''}`}>
+      <header className="header">
+        <div className="logo flex items-center">
+          <FaCar className="app-icon" />
+          <span>Carpool</span>
         </div>
+        <nav className="nav">
+          <a href="#">About</a>
+          <a href="#">How it works</a>
+          <a href="#">Safety</a>
+          <a href="#">Pricing</a>
+          <a href="#" className="signup">Sign up</a>
+          <a href="#" className="login">Log in</a>
+          <button onClick={toggleDarkMode} className="dark-mode-toggle">
+            {darkMode ? <FaSun /> : <FaMoon />}
+          </button>
+        </nav>
+      </header>
+
+      <main className="main-content">
+        <div className="hero-image-wrapper">
+          <img src={img} alt="Carpool Illustration" className="hero-image" />
+          <div className="hero-content">
+            <h1>Ride together. Save together.</h1>
+            <p>Find or offer a ride with people you trust. Carpool is the future of ridesharing.</p>
+            <div className="search-bar">
+              <FaSearch className="search-icon" />
+              <input type="text" placeholder="Where are you going?" />
+              <button>Submit</button>
+            </div>
+          </div>
+        </div>
+
+        <section className="cta-section">
+          <h2>Ready to go?</h2>
+          <button className="find-ride">Find a ride</button>
+        </section>
+
+        <section className="why-carpool">
+          <h2>Why Carpool?</h2>
+          <div className="cards">
+            <div className="card">
+              <h3>Ride with friends</h3>
+              <p>Find familiar faces & make new friends during your journey. With Carpool, you belong to a community.</p>
+            </div>
+            <div className="card">
+              <h3>Chat with your driver</h3>
+              <p>Ask questions, chat with your driver, and plan your trip together.</p>
+            </div>
+            <div className="card">
+              <h3>Get home sooner</h3>
+              <p>Carpool rides help you reach your destination faster. Skip the public transport hassle!</p>
+            </div>
+            <div className="card">
+              <h3>Safety first</h3>
+              <p>Your safety is our priority. Verified profiles and our community ensure a safe journey every time.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+      <div className="msg" style={{ textAlign: 'center', position: ' ', bottom: '0' }}>
+        <h1>Made By Aditya With ❤️ </h1>
       </div>
     </div>
   );
-}
+};
 
-export default Example;
+export default Home;
