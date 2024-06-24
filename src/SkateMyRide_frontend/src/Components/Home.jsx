@@ -41,6 +41,7 @@ const Home = () => {
         setAccount(accounts[0]);
       } catch (error) {
         console.error(error);
+        alert('Failed to connect wallet. Please try again by refreshing the page.');
       }
     } else {
       alert('MetaMask is not installed. Please consider installing it: https://metamask.io/download.html');
@@ -59,6 +60,11 @@ const Home = () => {
           <a href="#">How it works</a>
           <a href="#">Safety</a>
           <a href="#">Pricing</a>
+          {account && (
+            <Link to="/user-profile" className="my-profile">
+              My Profile
+            </Link>
+          )}
           <button className="connect-wallet" onClick={connectWallet}>
             {account ? `Connected: ${account.substring(0, 6)}...` : "Connect Wallet"}
           </button>

@@ -1,8 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { createBrowserHistory } from 'history';
+import { useNavigate } from 'react-router-dom';
+import detectEthereumProvider from '@metamask/detect-provider';
 import './Page-Styling/user-profile.scss';
-import { FaUser, FaEnvelope, FaLock, FaMoneyCheck, FaPhone, FaCar } from 'react-icons/fa';
+import { FaUser, FaCar, FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const UserProfile = () => {
+  const history = createBrowserHistory();
+  const navigate = useNavigate();
+  const [connectedWalletAccountAddress, setConnectedWalletAccountAddress] = useState('');
+  const [showAddress, setShowAddress] = useState(false);
+
+  useEffect(() => {
+    const fetchConnectedWalletAddress = async () => {
+      const provider = await detectEthereumProvider();
+
+      if (provider) {
+        const accounts = await provider.request({ method: 'eth_requestAccounts' });
+        setConnectedWalletAccountAddress(accounts[0]);
+      } else {
+        console.log('Please install MetaMask!');
+      }
+    };
+
+    fetchConnectedWalletAddress();
+  }, []);
+
+  const handleBecomeDriver = () => {
+    navigate('/create-ride', { replace: true });
+  };
+
+  const toggleShowAddress = () => {
+    setShowAddress(!showAddress);
+  };
+
   return (
     <div className="profile-container">
       <header className="header">
@@ -12,24 +43,18 @@ const UserProfile = () => {
           <a href="#">Food</a>
           <a href="#">Groceries</a>
           <a href="#">More</a>
-          <button className="become-driver">Become a driver</button>
-          <div className="profile-pic">
-            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile" />
-          </div>
+          <button className="become-driver" onClick={handleBecomeDriver}>Become a driver</button>
         </nav>
       </header>
-      
+
       <main className="main-content">
         <div className="profile-header">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile" className="profile-picture" />
-          <h2>Sophia Walker</h2>
-          <p>4.86 · 38 rides · 1 review</p>
+          <h2>User Profile</h2>
           <div className="profile-buttons">
-            <button className="edit-profile">Edit Profile</button>
-            <button className="become-driver">Become a driver</button>
+            <button className="become-driver" onClick={handleBecomeDriver}>Become a driver</button>
           </div>
         </div>
-        
+
         <div className="tabs">
           <button className="tab active">Personal Info</button>
           <button className="tab">Booking History</button>
@@ -41,40 +66,13 @@ const UserProfile = () => {
           <div className="info-group">
             <FaUser className="icon" />
             <div>
-              <h4>Name</h4>
-              <p>Sophia Walker</p>
-            </div>
-          </div>
-
-          <div className="info-group">
-            <FaEnvelope className="icon" />
-            <div>
-              <h4>Email</h4>
-              <p>sophia@walker.com</p>
-            </div>
-          </div>
-
-          <div className="info-group">
-            <FaLock className="icon" />
-            <div>
-              <h4>Password</h4>
-              <p>•••••••••••••••••</p>
-            </div>
-          </div>
-
-          <div className="info-group">
-            <FaMoneyCheck className="icon" />
-            <div>
-              <h4>Payment</h4>
-              <p>•••••••••••••••••</p>
-            </div>
-          </div>
-
-          <div className="info-group">
-            <FaPhone className="icon" />
-            <div>
-              <h4>Phone</h4>
-              <p>(123) 456-7890</p>
+              <h4>Account Address</h4>
+              <div className="address-container">
+                <p>{showAddress ? connectedWalletAccountAddress : '••••••••••••••••••••••••••••••••••••'}</p>
+                <span className="toggle-address" onClick={toggleShowAddress}>
+                  {showAddress ? <FaEyeSlash /> : <FaEye />}
+                </span>
+              </div>
             </div>
           </div>
         </section>
