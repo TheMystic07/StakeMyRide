@@ -1,8 +1,13 @@
 import React from 'react';
 import './Page-Styling/book-ride.scss';
 import { FaMapMarkerAlt, FaClock, FaCar, FaUser, FaDollarSign } from 'react-icons/fa';
+import { useLocation } from 'react-router-dom';
 
 const BookRide = () => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const destination = searchParams.get('destination');
+
   return (
     <div className="book-ride-container">
       <header className="header">
@@ -17,7 +22,7 @@ const BookRide = () => {
           </div>
         </div>
       </header>
-      
+
       <main className="main-content">
         <h1>Book a ride</h1>
         <p className="subtitle">Select a pickup and drop-off location to view available rides</p>
@@ -37,7 +42,7 @@ const BookRide = () => {
             <FaMapMarkerAlt className="icon" />
             <div>
               <h3>Drop-off location</h3>
-              <p>San Francisco, CA</p>
+              <p>{destination}</p>
             </div>
           </div>
 
