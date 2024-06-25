@@ -1,25 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { createBrowserHistory } from 'history';
 import { useNavigate } from 'react-router-dom';
-import detectEthereumProvider from '@metamask/detect-provider';
 import './Page-Styling/user-profile.scss';
 import { FaUser, FaCar, FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const UserProfile = () => {
-  const history = createBrowserHistory();
   const navigate = useNavigate();
   const [connectedWalletAccountAddress, setConnectedWalletAccountAddress] = useState('');
   const [showAddress, setShowAddress] = useState(false);
 
   useEffect(() => {
     const fetchConnectedWalletAddress = async () => {
-      const provider = await detectEthereumProvider();
-
-      if (provider) {
-        const accounts = await provider.request({ method: 'eth_requestAccounts' });
-        setConnectedWalletAccountAddress(accounts[0]);
+      if (window.ic.plug && window.ic.plug.isConnected) {
+        const response = await window.ic.plug.requestConnect({
+          host: "https://mainnet-api.internetcomputer.org",
+        });
+        setConnectedWalletAccountAddress(response.accounts[0]);
       } else {
-        console.log('Please install MetaMask!');
+        console.log('Please install the Plug wallet browser extension!');
       }
     };
 

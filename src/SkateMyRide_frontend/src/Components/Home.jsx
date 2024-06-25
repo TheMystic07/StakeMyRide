@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import "./Home.scss";
 import { FaSearch, FaSun, FaMoon, FaCar } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import Web3 from "web3";
 
 const Home = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -33,18 +32,24 @@ const Home = () => {
   };
 
   const connectWallet = async () => {
-    if (window.ethereum) {
+    if (window.ic && window.ic.plug) {
       try {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        const web3 = new Web3(window.ethereum);
-        const accounts = await web3.eth.getAccounts();
-        setAccount(accounts[0]);
+        const connected = await window.ic.plug.requestConnect({
+          whitelist: [],
+          host: "https://mainnet.dfinity.network",
+        });
+        if (connected) {
+          const principalId = await window.ic.plug.agent.getPrincipal();
+          setAccount(principalId.toString());
+        }
       } catch (error) {
-        console.error(error);
-        alert('Failed to connect wallet. Please try again by refreshing the page.');
+        console.error("Failed to connect wallet:", error);
+        alert("Failed to connect wallet. Please try again.");
       }
     } else {
-      alert('MetaMask is not installed. Please consider installing it: https://metamask.io/download.html');
+      alert(
+        "Please install the Plug wallet browser extension to connect your wallet."
+      );
     }
   };
 
@@ -66,7 +71,9 @@ const Home = () => {
             </Link>
           )}
           <button className="connect-wallet" onClick={connectWallet}>
-            {account ? `Connected: ${account.substring(0, 6)}...` : "Connect Wallet"}
+            {account
+              ? `Connected: ${account.substring(0, 6)}...`
+              : "Connect Wallet"}
           </button>
           <button onClick={toggleDarkMode} className="dark-mode-toggle">
             {darkMode ? <FaSun /> : <FaMoon />}
