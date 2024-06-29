@@ -1,7 +1,120 @@
-import React from 'react';
+
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Page-Styling/create-ride.scss';
+import { RideContext } from '../RideContext';
+import { db } from '../Firebase';
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
 
 const CreateRidePage = () => {
+  const [formData, setFormData] = useState({
+    Name: '',
+    make: '',
+    model: '',
+    year: '',
+    color: '',
+    licensePlate: '',
+    numberOfSeats: 0,
+    pricePerSeat: 0,
+    minNumberOfSeats: 0,
+    departureDateTime: '',
+    arrivalDateTime: '',
+    pickupLocation: '',
+    dropoffLocation: '',
+  });
+
+  const { setRideData, addRide } = useContext(RideContext);
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [id]: id === 'numberOfSeats' || id === 'pricePerSeat' || id === 'minNumberOfSeats' ? Number(value) : value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setRideData(formData);
+
+    // Define rideData
+    const rideData = {
+      Name: formData.Name,
+      make: formData.make,
+      model: formData.model,
+      year: formData.year,
+      color: formData.color,
+      licensePlate: formData.licensePlate,
+      numberOfSeats: Number(formData.numberOfSeats),
+      pricePerSeat: Number(formData.pricePerSeat),
+      minNumberOfSeats: Number(formData.minNumberOfSeats),
+      departureDateTime: Timestamp.fromDate(new Date(formData.departureDateTime)),
+      arrivalDateTime: Timestamp.fromDate(new Date(formData.arrivalDateTime)),
+      pickupLocation: formData.pickupLocation,
+      dropoffLocation: formData.dropoffLocation,
+    };
+
+    // Validate the data
+    if (
+      !rideData.Name ||
+      !rideData.make ||
+      !rideData.model ||
+      !rideData.year ||
+      !rideData.color ||
+      !rideData.licensePlate ||
+      !rideData.numberOfSeats ||
+      !rideData.pricePerSeat ||
+      !rideData.minNumberOfSeats ||
+      !rideData.departureDateTime ||
+      !rideData.arrivalDateTime ||
+      !rideData.pickupLocation ||
+      !rideData.dropoffLocation
+    ) {
+      console.error('Missing required fields');
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    if (
+      typeof rideData.Name !== 'string' ||
+      typeof rideData.make !== 'string' ||
+      typeof rideData.model !== 'string' ||
+      typeof rideData.year !== 'string' ||
+      typeof rideData.color !== 'string' ||
+      typeof rideData.licensePlate !== 'string' ||
+      typeof rideData.numberOfSeats !== 'number' ||
+      typeof rideData.pricePerSeat !== 'number' ||
+      typeof rideData.minNumberOfSeats !== 'number' ||
+      typeof rideData.departureDateTime !== 'object' ||
+      typeof rideData.arrivalDateTime !== 'object' ||
+      typeof rideData.pickupLocation !== 'string' ||
+      typeof rideData.dropoffLocation !== 'string'
+    ) {
+      console.error('Invalid field types');
+      alert('Some fields have invalid data types. Please check your inputs.');
+      return;
+    }
+
+    try {
+      console.log('Submitting form data:', rideData);
+
+      const docRef = await addDoc(collection(db, 'offeredRides'), rideData);
+      console.log("Document written with ID: ", docRef.id);
+
+      addRide(rideData); // Add the ride to the RideContext
+      navigate('/find-ride');
+    } catch (error) {
+      console.error('Error adding document: ', error);
+      if (error.code) console.error('Error code:', error.code);
+      if (error.message) console.error('Error message:', error.message);
+      if (error.details) console.error('Error details:', error.details);
+      if (error.serverResponse) console.error('Server response:', error.serverResponse);
+      alert('An error occurred while creating the ride. Please check the console for more details.');
+    }
+  };
+  
+
   return (
     <div className="create-ride-container">
       <header className="header">
@@ -18,28 +131,13 @@ const CreateRidePage = () => {
       </header>
 
       <main className="main-content">
-        <h1>Step 1 of 3</h1>
-
-        <div className="progress-bar">
-          <div className="progress"></div>
-        </div>
-
-        <h2>Vehicle details</h2>
-
-        <form>
+        <form onChange={handleChange} onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="vehicleType">Vehicle type</label>
-            <select id="vehicleType">
-              <option value="" disabled selected>Select vehicle type</option>
-              <option value="Toyota">Toyota</option>
-              <option value="Honda">Honda</option>
-              <option value="Ford">Ford</option>
-              {/* Add more options as needed */}
-            </select>
+            <label htmlFor="Name">Enter Your name</label>
+            <input type="text" id="Name" placeholder="e.g. Aditya" />
           </div>
-
           <div className="form-group">
-            <label htmlFor="make">Make</label>
+            <label htmlFor="make">Car Company</label>
             <input type="text" id="make" placeholder="e.g. Toyota" />
           </div>
 
@@ -59,7 +157,7 @@ const CreateRidePage = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="licensePlate">License plate</label>
+            <label htmlFor="licensePlate">License plate No.</label>
             <input type="text" id="licensePlate" placeholder="e.g. 123-ABC" />
           </div>
 
@@ -82,12 +180,12 @@ const CreateRidePage = () => {
 
           <div className="form-group">
             <label htmlFor="departureDateTime">Departure date and time</label>
-            <input type="text" id="departureDateTime" placeholder="e.g. 2023-12-01 12:00" />
+            <input type="datetime-local" id="departureDateTime" />
           </div>
 
           <div className="form-group">
             <label htmlFor="arrivalDateTime">Arrival date and time</label>
-            <input type="text" id="arrivalDateTime" placeholder="e.g. 2023-12-01 12:00" />
+            <input type="datetime-local" id="arrivalDateTime" />
           </div>
 
           <div className="form-group">
@@ -105,6 +203,6 @@ const CreateRidePage = () => {
       </main>
     </div>
   );
-}
+};
 
 export default CreateRidePage;

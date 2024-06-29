@@ -17,6 +17,7 @@ body {
   h1 {
     font-size: 24px;
     margin-bottom: 10px;
+    text-align: center;
   }
 
   p {
@@ -39,7 +40,7 @@ body {
     }
 
     .time {
-      color: gray;
+      color: black;
     }
   }
 }
@@ -69,8 +70,13 @@ body {
   .rides {
     .ride {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       margin-bottom: 20px;
+      border: 2px solid black;
+      border-radius: 30px;
+      border-radius:30px;
+      padding: 16px;
+
 
       .profile-picture {
         width: 50px;
@@ -87,14 +93,27 @@ body {
       }
 
       .ride-info {
+        button{
+          padding: 10px 10px;
+          margin-top: 5px;
+          background-color: black;
+          color: white;
+          border: none;
+          border-radius: 25px;
+          cursor: pointer;
+          font-size: 0.9rem;
+          text-decoration: none;
+          
+        }
         h4 {
           margin: 0;
           font-size: 16px;
+          margin-top: 10px;
         }
 
         p {
           margin: 0;
-          color: gray;
+          color: black;
         }
       }
     }

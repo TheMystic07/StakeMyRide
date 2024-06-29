@@ -1,16 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
-import { WalletProvider } from "./WalletContext";
-import App from "./App";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import { RideProvider } from './RideContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <WalletProvider>
-        <App />
-      </WalletProvider>
-    </BrowserRouter>
+    <RideProvider>
+      <App />
+    </RideProvider>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root')
 );

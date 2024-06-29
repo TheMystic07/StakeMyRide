@@ -1,403 +1,418 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Roboto', sans-serif;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.home-container {
-  .hero-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    text-align: center;
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 1.25rem;
-      margin-bottom: 20px;
-    }
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
   }
-  min-height: 100vh;
-  background-color: white;
-  color: black;
 
-  &.dark {
-    background-color: #1a202c;
-    color: #a0aec0;
+  .home-container {
+    .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: center;
 
-    .header {
-      background-color: #2d3748;
-      border-bottom: 1px solid #4a5568;
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+      }
 
-      .nav {
-        a {
-          color: #a0aec0;
-          &:hover {
+      p {
+        font-size: 1.25rem;
+        margin-bottom: 20px;
+      }
+    }
+    min-height: 100vh;
+    background-color: white;
+    color: black;
+
+    &.dark {
+      background-color: #1a202c;
+      color: #a0aec0;
+
+      .header {
+        background-color: #2d3748;
+        border-bottom: 1px solid #4a5568;
+
+        .nav {
+          a {
+            color: #a0aec0;
+            &:hover {
+              text-decoration: none;
+              color: white;
+            }
+          }
+
+          .signup {
+            background-color: #4a5568;
+            color: #a0aec0;
             text-decoration: none;
-            color: white;
+
+            &:hover {
+              background-color: white;
+              color: black;
+            }
           }
-        }
 
-        .signup {
-          background-color: #4a5568;
-          color: #a0aec0;
-          text-decoration: none;
+          .login {
+            background-color: #4a5568;
+            color: #a0aec0;
+            border: 1px solid #4a5568;
 
-          &:hover {
-            background-color: white;
-            color: black;
-          }
-        }
-
-        .login {
-          background-color: #4a5568;
-          color: #a0aec0;
-          border: 1px solid #4a5568;
-
-          &:hover {
-            background-color: white;
-            color: black;
+            &:hover {
+              background-color: white;
+              color: black;
+            }
           }
         }
       }
+
+      .hero-image-wrapper {
+        background-color: #2d3748;
+        color: #a0aec0;
+      }
+
+      .hero-content {
+        color: #a0aec0;
+      }
+
+      input {
+        color: #a0aec0;
+
+        &::placeholder {
+          color: #a0aec0;
+        }
+      }
+      button {
+        background-color: #4a5568;
+        color: white;
+
+        &:hover {
+          background-color: #333;
+        }
+      }
+
+      .cta-section {
+        color: #a0aec0;
+
+        h2 {
+          color: #a0aec0;
+        }
+      }
+
+      .card {
+        background-color: #c5ccd7;
+        border: 1px solid #4a5568;
+        color: black;
+      }
+
+      .card p {
+        color: black !important;
+      }
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      border-bottom: 1px solid #e0e0e0;
+      background-color: white;
+
+      .logo {
+        display: flex;
+        align-items: center;
+
+        .app-icon {
+          margin-right: 10px;
+          font-size: 1.5rem;
+        }
+
+        font-weight: 700;
+        font-size: 1.5rem;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+
+        a {
+          margin-right: 20px;
+          text-decoration: none;
+          color: inherit;
+          font-weight: 500;
+        }
+        .disconnect-wallet{
+          background-color: black;
+          color: white;
+          padding: 8px 15px;
+          border-radius: 25px;
+          border: none;
+          cursor: pointer;
+          margin-right: 10px;
+          font-weight: 500;
+          &:hover {
+            background-color: grey;
+            color: black;
+          }
+        }
+
+        .connect-wallet {
+          background-color: black;
+          color: white;
+          padding: 8px 15px;
+          border-radius: 25px;
+          border: none;
+          cursor: pointer;
+          margin-right: 10px;
+          font-weight: 500;
+
+          &:hover {
+            background-color: grey;
+            color: black;
+          }
+        }
+
+        .dark-mode-toggle {
+          background: none;
+          border: none;
+          cursor: pointer;
+          font-size: 1.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-left: 10px;
+          padding: 8px;
+          border-radius: 25px;
+
+          &:hover {
+            background-color: #e0e0e0;
+          }
+
+          svg {
+            color: inherit;
+          }
+        }
+      }
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px 20px;
     }
 
     .hero-image-wrapper {
-      background-color: #2d3748;
-      color: #a0aec0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 80%;
+      max-height: 500px;
+      overflow: hidden;
+      border-radius: 10px;
+      background-color: #f5f5f5;
+      margin: 20px 0;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: auto;
+      filter: brightness(0.7);
     }
 
     .hero-content {
-      color: #a0aec0;
-    }
-
-    input {
-      color: #a0aec0;
-
-      &::placeholder {
-        color: #a0aec0;
-      }
-    }
-    button {
-      background-color: #4a5568;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, 400%);
       color: white;
+      text-align: center;
 
-      &:hover {
-        background-color: #333;
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 1.25rem;
+        margin-bottom: 20px;
+      }
+
+      .search-bar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: white;
+        border-radius: 25px;
+        overflow: hidden;
+        width: 100%;
+        max-width: 500px;
+
+        form {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+        input{
+          padding: 10px 15px;
+          border: none;
+          font-size: 1rem;
+          width: 100%;
+          outline: none;
+
+          &::placeholder {
+            color: gray;
+          }
+        }
+
+        button {
+          padding: 10px 20px;
+          border: none;
+          background-color: black;
+          color: white;
+          font-size: 1rem;
+          cursor: pointer;
+
+          &:hover {
+            background-color: gray;
+          }
+        }
       }
     }
 
     .cta-section {
-      color: #a0aec0;
+      margin: 40px 0;
+      text-align: center;
 
       h2 {
-        color: #a0aec0;
-      }
-    }
-
-    .card {
-      background-color: #c5ccd7;
-      border: 1px solid #4a5568;
-      color: black;
-    }
-
-    .card p {
-      color: black !important;
-    }
-  }
-
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 50px;
-    border-bottom: 1px solid #e0e0e0;
-    background-color: white;
-
-    .logo {
-      display: flex;
-      align-items: center;
-
-      .app-icon {
-        margin-right: 10px;
-        font-size: 1.5rem;
+        color: black;
+        font-size: 2rem;
+        margin-bottom: 20px;
       }
 
-      font-weight: 700;
-      font-size: 1.5rem;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-
-      a {
-        margin-right: 20px;
-        text-decoration: none;
-        color: inherit;
-        font-weight: 500;
-      }
-
-      .connect-wallet {
-        background-color: black;
-        color: white;
-        padding: 8px 15px;
-        border-radius: 25px;
-        border: none;
-        cursor: pointer;
-        margin-right: 10px;
-        font-weight: 500;
-
-        &:hover {
-          background-color: grey;
-          color: black;
-        }
-      }
-
-      .dark-mode-toggle {
-        background: none;
-        border: none;
-        cursor: pointer;
-        font-size: 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: 10px;
-        padding: 8px;
-        border-radius: 25px;
-
-        &:hover {
-          background-color: #e0e0e0;
-        }
-
-        svg {
-          color: inherit;
-        }
-      }
-    }
-  }
-
-  .main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 50px 20px;
-  }
-
-  .hero-image-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 80%;
-    max-height: 500px;
-    overflow: hidden;
-    border-radius: 10px;
-    background-color: #f5f5f5;
-    margin: 20px 0;
-  }
-
-  .hero-image {
-    width: 100%;
-    height: auto;
-    filter: brightness(0.7);
-  }
-
-  .hero-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 400%);
-    color: white;
-    text-align: center;
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 1.25rem;
-      margin-bottom: 20px;
-    }
-
-    .search-bar {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: white;
-      border-radius: 25px;
-      overflow: hidden;
-      width: 100%;
-      max-width: 500px;
-
-      form {
-        display: flex;
-        width: 100%;
-      }
-      input {
-        padding: 10px 15px;
-        border: none;
-        font-size: 1rem;
-        width: 100%;
-        outline: none;
-
-        &::placeholder {
-          color: gray;
-        }
-      }
-
-      button {
+      .find-ride {
         padding: 10px 20px;
-        border: none;
         background-color: black;
         color: white;
-        font-size: 1rem;
+        border: none;
+        border-radius: 25px;
         cursor: pointer;
+        font-size: 1rem;
+        text-decoration: none;
 
         &:hover {
           background-color: gray;
         }
       }
     }
-  }
 
-  .cta-section {
-    margin: 40px 0;
-    text-align: center;
-
-    h2 {
-      color: black;
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-
-    .find-ride {
-      padding: 10px 20px;
-      background-color: black;
-      color: white;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      font-size: 1rem;
-      text-decoration: none;
-
-      &:hover {
-        background-color: gray;
-      }
-    }
-  }
-
-  .why-carpool {
-    text-align: center;
-    margin: 40px 0;
-    width: 100%;
-
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 40px;
-    }
-
-    .cards {
-      display: flex;
-      justify-content: space-around;
-      align-items: flex-start;
-      flex-wrap: wrap;
+    .why-carpool {
+      text-align: center;
+      margin: 40px 0;
       width: 100%;
-    }
 
-    .card {
-      background-color: white;
-      border: 1px solid #e0e0e0;
-      border-radius: 10px;
-      padding: 20px;
-      flex: 1;
-      margin: 10px;
-      min-width: 200px;
-      max-width: 220px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      text-align: left;
-
-      h3 {
-        font-size: 1.25rem;
-        margin-bottom: 10px;
-        margin-top: 0;
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 40px;
       }
 
-      p {
+      .cards {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        width: 100%;
+      }
+
+      .card {
+        background-color: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        padding: 20px;
+        flex: 1;
+        margin: 10px;
+        min-width: 200px;
+        max-width: 220px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: left;
+
+        h3 {
+          font-size: 1.25rem;
+          margin-bottom: 10px;
+          margin-top: 0;
+        }
+
+        p {
+          font-size: 1rem;
+          color: gray;
+          margin: 0;
+        }
+      }
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 1024px) {
+      .cards .card {
+        flex: 1 0 calc(33.33% - 20px);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .cards .card {
+        flex: 1 0 calc(50% - 20px);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header {
+        padding: 20px;
+        flex-direction: column;
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .nav a, .connect-wallet {
+        margin: 10px 0;
+      }
+
+      .hero-content h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero-content p {
         font-size: 1rem;
-        color: gray;
-        margin: 0;
+      }
+
+      .search-bar {
+        width: 100%;
+        max-width: 350px;
+      }
+
+      .cta-section h2 {
+        font-size: 1.5rem;
+      }
+
+      .why-carpool h2 {
+        font-size: 1.5rem;
+      }
+
+      .cards {
+        flex-direction: column;
+      }
+
+      .cards .card {
+        max-width: 100%;
+        width: 100%;
+        flex: 1 0 100%;
       }
     }
   }
-
-  /* Media Queries for Responsiveness */
-  @media (max-width: 1024px) {
-    .cards .card {
-      flex: 1 0 calc(33.33% - 20px);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .cards .card {
-      flex: 1 0 calc(50% - 20px);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .header {
-      padding: 20px;
-      flex-direction: column;
-    }
-
-    .nav {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .nav a, .connect-wallet {
-      margin: 10px 0;
-    }
-
-    .hero-content h1 {
-      font-size: 1.8rem;
-    }
-
-    .hero-content p {
-      font-size: 1rem;
-    }
-
-    .search-bar {
-      width: 100%;
-      max-width: 350px;
-    }
-
-    .cta-section h2 {
-      font-size: 1.5rem;
-    }
-
-    .why-carpool h2 {
-      font-size: 1.5rem;
-    }
-
-    .cards {
-      flex-direction: column;
-    }
-
-    .cards .card {
-      max-width: 100%;
-      width: 100%;
-      flex: 1 0 100%;
-    }
-  }
-}

@@ -65,9 +65,6 @@ let sellers = HashMap.HashMap<Principal, Seller >(0, Principal.equal, Principal.
   };
 
 
-
-
-
   public shared(msg) func registerSeller(name:Text ) : async Text {
 
   let emp : [Vehicle] = [];
