@@ -96,13 +96,7 @@
         }
       }
 
-      .cta-section {
-        color: #a0aec0;
-
-        h2 {
-          color: #a0aec0;
-        }
-      }
+      
 
       .card {
         background-color: #c5ccd7;
@@ -286,31 +280,7 @@
       }
     }
 
-    .cta-section {
-      margin: 40px 0;
-      text-align: center;
 
-      h2 {
-        color: black;
-        font-size: 2rem;
-        margin-bottom: 20px;
-      }
-
-      .find-ride {
-        padding: 10px 20px;
-        background-color: black;
-        color: white;
-        border: none;
-        border-radius: 25px;
-        cursor: pointer;
-        font-size: 1rem;
-        text-decoration: none;
-
-        &:hover {
-          background-color: gray;
-        }
-      }
-    }
 
     .why-carpool {
       text-align: center;
@@ -397,9 +367,7 @@
         max-width: 350px;
       }
 
-      .cta-section h2 {
-        font-size: 1.5rem;
-      }
+     
 
       .why-carpool h2 {
         font-size: 1.5rem;

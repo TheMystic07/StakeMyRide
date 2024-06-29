@@ -123,12 +123,7 @@ const Home = () => {
           </form>
         </div>
 
-        <section className="cta-section">
-          <h2>Ready to go?</h2>
-          <Link to="/find-ride" className="find-ride">
-            Show all rides
-          </Link>
-        </section>
+        
 
         <section className="why-carpool">
           <h2>Why Carpool?</h2>

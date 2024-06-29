@@ -9,7 +9,6 @@ const UserProfile = () => {
     useState("");
   const [showAddress, setShowAddress] = useState(false);
   const [activeTab, setActiveTab] = useState("personal-info");
-  const [offeredRides, setOfferedRides] = useState([]);
 
   useEffect(() => {
     const storedAccount = localStorage.getItem("connectedWalletAccountAddress");
@@ -81,12 +80,7 @@ const UserProfile = () => {
           >
             Booking History
           </button>
-          <button
-            className={`tab ${activeTab === "offered-rides" ? "active" : ""}`}
-            onClick={() => setActiveTab("offered-rides")}
-          >
-            Offered Rides
-          </button>
+          
         </div>
 
         {activeTab === "personal-info" && (
@@ -131,26 +125,7 @@ const UserProfile = () => {
           </section>
         )}
 
-        {activeTab === "offered-rides" && (
-          <section className="offered-rides">
-            <h3>Offered Rides</h3>
-            {offeredRides.map((ride) => (
-              <div className="history-item" key={ride.id}>
-                <FaCar className="icon" />
-                <div>
-                  <h4>{ride.status}</h4>
-                  <p>{ride.date}</p>
-                  <p>
-                    {ride.pickup} to {ride.destination}
-                  </p>
-                </div>
-              </div>
-            ))}
-            <a href="#" className="view-all">
-              View all
-            </a>
-          </section>
-        )}
+       
       </main>
     </div>
   );
