@@ -7,6 +7,7 @@ import { collection, getDocs } from "firebase/firestore";
 
 const FindRidePage = () => {
   const [offeredRides, setOfferedRides] = useState([]);
+  const [totalPayment, setTotalPayment] = useState(0); // State to store total payment
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const pickupLocation = queryParams.get("pickup");
@@ -20,9 +21,8 @@ const FindRidePage = () => {
         ...doc.data(),
         departureDateTime: doc.data().departureDateTime.toDate(),
         arrivalDateTime: doc.data().arrivalDateTime.toDate(),
+        totalPayment: 0, // Initialize total payment in each ride object
       }));
-
-      console.log(rides);
 
       const filteredRides = rides.filter(
         (ride) =>
@@ -39,6 +39,31 @@ const FindRidePage = () => {
 
     fetchOfferedRides();
   }, [pickupLocation, destinationLocation]);
+
+  // Function to calculate total payment
+  const calculateTotalPayment = (pricePerSeat, numberOfSeats) => {
+    return pricePerSeat * numberOfSeats;
+  };
+
+  // Function to handle booking ride
+  const handleBookRide = (ride, pricePerSeat, numberOfSeats) => {
+    const totalPayment = calculateTotalPayment(pricePerSeat, numberOfSeats);
+    setTotalPayment(totalPayment);
+
+    // Update the ride object with total payment
+    const updatedRides = offeredRides.map((r) => {
+      if (r.id === ride.id) {
+        return {
+          ...r,
+          totalPayment: totalPayment,
+        };
+      }
+      return r;
+    });
+
+    setOfferedRides(updatedRides);
+    // Optionally, you can perform further actions like initiating payment process here
+  };
 
   return (
     <div className="container">
@@ -84,11 +109,11 @@ const FindRidePage = () => {
 
         <div className="rides">
           {offeredRides.length > 0 ? (
-            offeredRides.map((ride, index) => (
+            offeredRides.map((ride) => (
               <div className="ride" key={ride.id}>
                 <div className="profile-picture">
                   <img
-                    src={`https://randomuser.me/api/portraits/thumb/men/${index}.jpg`}
+                    src={`https://randomuser.me/api/portraits/thumb/men/${ride.id}.jpg`}
                     alt="Profile"
                   />
                 </div>
@@ -101,7 +126,13 @@ const FindRidePage = () => {
                   <p>Number of Seats: {ride.numberOfSeats}</p>
                   <p>Price per Seat: {ride.pricePerSeat}</p>
                   <p>Minimum Number of Seats: {ride.minNumberOfSeats}</p>
-                  <button>Book Ride</button>
+                  {ride.totalPayment > 0 && (
+                    <div className="total-payment">
+                      <h3>Total Payment:</h3>
+                      <p>{ride.totalPayment} ICP test tokens</p>
+                    </div>
+                  )}
+                  <button onClick={() => handleBookRide(ride, ride.pricePerSeat, ride.numberOfSeats)}>Book Ride</button>
                 </div>
               </div>
             ))

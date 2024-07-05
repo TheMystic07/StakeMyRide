@@ -1,5 +1,5 @@
 import img from "../images/car_pool.png";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.scss";
 import { FaSearch, FaSun, FaMoon, FaCar } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,7 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 const Home = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [searchInput, setSearchInput] = useState({ pickup: "", destination: "" });
-  const [account, setAccount] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -21,46 +20,10 @@ const Home = () => {
     } else {
       document.documentElement.classList.remove("dark");
     }
-
-    const storedAccount = localStorage.getItem("account");
-    if (storedAccount) {
-      setAccount(storedAccount);
-    } else {
-      connectWallet();
-    }
   }, [darkMode]);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
-  };
-
-  const connectWallet = async () => {
-    if (window.ic && window.ic.plug) {
-      if (!account) {
-        try {
-          const connected = await window.ic.plug.requestConnect({
-            whitelist: [],
-            host: "https://mainnet.dfinity.network",
-          });
-          if (connected) {
-            const principalId = await window.ic.plug.agent.getPrincipal();
-            setAccount(principalId.toString());
-            localStorage.setItem("account", principalId.toString());
-          }
-        } catch (error) {
-          console.error("Failed to connect wallet:", error);
-          alert("Failed to connect wallet. Please try again.");
-        }
-      } else {
-        // Disconnect wallet
-        setAccount(null);
-        localStorage.removeItem("account");
-      }
-    } else {
-      alert(
-        "Please install the Plug wallet browser extension to connect your wallet."
-      );
-    }
   };
 
   return (
@@ -75,15 +38,8 @@ const Home = () => {
           <a href="#">How it works</a>
           <a href="#">Safety</a>
           <a href="#">Pricing</a>
-          {account && (
-            <Link to="/user-profile" className="my-profile">
-              My Profile
-            </Link>
-          )}
-          <button className="connect-wallet" onClick={connectWallet}>
-            {account
-              ? `Connected: ${account.substring(0, 6)}...`
-              : "Connect Wallet"}
+          <button className="connect-wallet" onClick={() => alert("Connect Wallet")}>
+            Connect Wallet
           </button>
           <button onClick={toggleDarkMode} className="dark-mode-toggle">
             {darkMode ? <FaSun /> : <FaMoon />}
@@ -105,25 +61,23 @@ const Home = () => {
         <div className="hero-content">
           <form onSubmit={handleSubmit}>
             <div className="search-bar">
-              <input className="input1"
+              <input
                 type="text"
-                placeholder="Enter Pickup location     |"
+                placeholder="Enter Pickup location"
                 value={searchInput.pickup}
                 onChange={(event) => setSearchInput({ ...searchInput, pickup: event.target.value })}
               />
-
-              <input className="input2"
+              <div className="divider"></div>
+              <input
                 type="text"
                 placeholder="Enter Destination"
                 value={searchInput.destination}
                 onChange={(event) => setSearchInput({ ...searchInput, destination: event.target.value })}
               />
-              <button type="submit">Submit</button>
+              <button type="submit"><FaSearch /></button>
             </div>
           </form>
         </div>
-
-        
 
         <section className="why-carpool">
           <h2>Why Carpool?</h2>
@@ -159,11 +113,8 @@ const Home = () => {
           </div>
         </section>
       </main>
-      <div
-        className="msg"
-        style={{ textAlign: "center", position: " ", bottom: "0" }}
-      >
-        <h1>Made By Aditya With ❤️ </h1>
+      <div className="msg">
+        <h1>Made By Aditya With ❤️</h1>
       </div>
     </div>
   );
